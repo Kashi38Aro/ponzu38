@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="OBS用効果音リモートコントロールシステム">
     <meta name="theme-color" content="#202020">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>OBSポン出しツール</title>
     <link rel="stylesheet" href="style.css">
     <!-- MP3メタデータ取得用ライブラリ -->
@@ -60,8 +62,7 @@
         </div>
 
         <!-- BGM Controls (Footer) -->
-        <div id="bgm-controls" class="bgm-controls">
-            <!-- シークバー -->
+<div id="bgm-controls" class="bgm-controls">
             <div class="bgm-seek-wrapper">
                 <div class="bgm-seek-container slider-container">
                     <input type="range" id="bgm-seek-bar" min="0" max="100" value="0" step="0.1">
@@ -70,7 +71,6 @@
             </div>
             
             <div class="bgm-info-row">
-                <!-- 左: 曲名ステータス -->
                 <div class="bgm-left-group">
                     <div class="bgm-status">
                         <span id="bgm-indicator" style="display:none;" class="playing-indicator"></span>
@@ -78,26 +78,24 @@
                     </div>
                 </div>
 
-                <!-- 中央: トランスポート -->
                 <div class="bgm-transport">
-                    <button id="bgm-shuffle-btn" class="transport-btn" title="シャッフル">🔀</button>
-                    <button id="bgm-prev-btn" class="transport-btn" title="前の曲">⏮</button>
-                    <button id="bgm-play-pause-btn" class="transport-btn play-pause-btn" title="再生/一時停止">▶</button>
-                    <button id="bgm-next-btn" class="transport-btn" title="次の曲">⏭</button>
-                    <button id="bgm-loop-btn" class="transport-btn" title="ループ">🔁</button>
+                    <button id="bgm-shuffle-btn" class="transport-btn material-icons-round" title="シャッフル">shuffle</button>
+                    <button id="bgm-prev-btn" class="transport-btn material-icons-round" title="前の曲">skip_previous</button>
+                    <button id="bgm-play-pause-btn" class="transport-btn play-pause-btn material-icons-round" title="再生/一時停止">play_arrow</button>
+                    <button id="bgm-next-btn" class="transport-btn material-icons-round" title="次の曲">skip_next</button>
+                    <button id="bgm-loop-btn" class="transport-btn material-icons-round" title="ループ">repeat</button>
                 </div>
                 
-                <!-- 右: 音量 & 停止ボタン群 -->
                 <div class="bgm-right-controls">
                     <div class="bgm-volume-wrapper" title="BGM音量">
-                        <i>🔊</i>
+                        <i class="material-icons-round" style="font-size: 1.2rem;">volume_up</i>
                         <div class="slider-container">
                             <input type="range" id="bgm-volume" min="0" max="1" step="0.01" value="1">
                         </div>
                     </div>
                     <div class="stop-btn-group">
-                        <button id="bgm-fade-stop-btn" class="mini-btn fade-stop-btn" title="フェードアウト停止">📉</button>
-                        <button id="bgm-stop-btn" class="mini-btn emergency-stop-btn" title="即時停止">⏹</button>
+                        <button id="bgm-fade-stop-btn" class="mini-btn fade-stop-btn material-icons-round" title="フェードアウト停止">trending_down</button>
+                        <button id="bgm-stop-btn" class="mini-btn emergency-stop-btn material-icons-round" title="即時停止">stop</button>
                     </div>
                 </div>
             </div>
@@ -167,6 +165,23 @@
             <div class="modal-content">
                 <span class="close-btn settings-close">&times;</span>
                 <h2 id="settings-title">⚙️ 設定</h2>
+                <div class="settings-section" style="border-bottom: 1px solid #444; padding-bottom: 20px; margin-bottom: 20px;">
+                    <h3>📂 外部フォルダ監視設定</h3>
+                    <p style="font-size:0.8rem; color:#aaa; margin-bottom:10px;">
+                        PC内の任意のフォルダを読み込みます。<br>
+                        パスを入力し、種類(SE/BGM)を選択して追加してください。
+                    </p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <input type="text" id="ext-folder-path" placeholder="例: C:\Users\Music\MyBGM" style="flex: 2;">
+                        <select id="ext-folder-type" style="flex: 1;">
+                            <option value="SE">SEとして追加</option>
+                            <option value="BGM">BGMとして追加</option>
+                        </select>
+                        <button id="add-ext-folder-btn" style="width: 50px; background: var(--accent-color); border:none;">＋</button>
+                    </div>
+                    <div id="ext-folder-list" style="background: #1a1a1a; padding: 10px; border-radius: 4px; min-height: 50px;">
+                        </div>
+                </div>
                 <div class="settings-section">
                     <h3>🎨 テーマカラー</h3>
                     <div class="setting-item">
